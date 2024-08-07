@@ -15,6 +15,15 @@ $ cat .gitattributes
 *.meta merge=unityyamlmerge eol=lf
 *.controller merge=unityyamlmerge eol=lf
 
+##    Specific assets exceptions (should come after generic definitions)
+##    Generated NavMeshes, Terrains, and UMA slots are always binary,
+##        even if unity serialization is set to "force text"
+NavMesh.asset                       binary uselfs
+**/Terrain*/*.asset                 binary uselfs
+*_Slot.asset                        binary uselfs
+LightingData.asset                  binary uselfs
+*.cubemap                           binary uselfs
+*.unitypackage                      binary uselfs
 
 ## git-lfs ##
 
