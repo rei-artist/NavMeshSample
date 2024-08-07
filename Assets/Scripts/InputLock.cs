@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class InputLock : MonoBehaviour
 {
+    [SerializeField] private GameObject pauseText;
     private bool paused = false;
 
     void Start()
@@ -21,17 +24,27 @@ public class InputLock : MonoBehaviour
         {
             if(paused)
             {
+                pauseText.SetActive(false);
                 Time.timeScale = 1f;
                 paused = false;
                 //Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
             }
-            else
+            else if(!Judgment.isClear)
             {
+                pauseText.SetActive(true);
                 Time.timeScale = 0f;
                // Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 paused = true;
+            }
+        }
+        if (paused || Judgment.isClear)
+        {
+            if(Input.GetKeyDown(KeyCode.Return))
+            {
+                Time.timeScale = 1f;
+                SceneManager.LoadScene(0);
             }
         }
     }

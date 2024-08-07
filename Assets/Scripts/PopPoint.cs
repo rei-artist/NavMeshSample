@@ -23,7 +23,7 @@ public class PopPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(time < Time.time && !popped)
+        if(time < Judgment.time && !popped)
         {
             for (int i = 0; i < num; i++)
             {

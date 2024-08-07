@@ -10,6 +10,10 @@ using static Cinemachine.CinemachineBlendDefinition;
 
 public class Judgment : MonoBehaviour
 {
+    private static float startTime;
+    public static float time {  get { return Time.time - startTime; } }
+    public static bool isClear { get; private set; }
+
     [SerializeField] private UnityChanControlScriptWithRgidBody player;
     [SerializeField] private TextMeshProUGUI remainEnemyText;
     [SerializeField] private TextMeshProUGUI timeText;
@@ -18,7 +22,12 @@ public class Judgment : MonoBehaviour
 
     private int remainEnemy = 0;
     private GUIStyle style;
-    private bool isClear = false;
+
+    private void Awake()
+    {
+        startTime = Time.time;
+        isClear = false;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +43,7 @@ public class Judgment : MonoBehaviour
     {
         if (isClear) return;
 
-        float lastTime = Time.time; 
+        float lastTime = time;
         if (lastTime < 0.5f) return;
         remainEnemy = GameObject.FindGameObjectsWithTag("Enemy").Count();
         if (remainEnemy == 0)
