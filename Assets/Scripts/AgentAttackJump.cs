@@ -11,6 +11,8 @@ public class AgentAttackJump : AgentAttack
     [SerializeField] private float jumpSpeed = 8f;
     [SerializeField] private float jumpHighRate = 0.5f;
     [SerializeField] private float endTime = 0.5f;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip audioClip;
 
     private Rigidbody rb;
     private Animator anim;
@@ -30,7 +32,13 @@ public class AgentAttackJump : AgentAttack
     private void OnCollisionEnter(Collision collision)
     {
         if (!attacking) return;
-        TryDamage(collision.gameObject, 1);
+        if(TryDamage(collision.gameObject, 1))
+        {
+            if(audioSource != null && audioClip != null)
+            {
+                audioSource.PlayOneShot(audioClip);
+            }
+        }
     }
 
     private IEnumerator Jump()

@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityChan;
 using UnityEngine;
 
 public class AgentAttackHadoken : AgentAttack
 {
     [SerializeField] private GameObject ballPrefab;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip audioClip;
+
     private Terrain terrain;
 
     private Rigidbody rb;
@@ -36,6 +40,12 @@ public class AgentAttackHadoken : AgentAttack
 
         anim.SetFloat("Speed", 0);
         anim.SetBool("Hadoken", true);
+
+        if (audioSource != null && audioClip != null)
+        {
+            audioSource.PlayOneShot(audioClip);
+        }
+
         yield return new WaitForSeconds(0.5f);
         var ball = Instantiate(ballPrefab);
         ball.transform.position = transform.position;

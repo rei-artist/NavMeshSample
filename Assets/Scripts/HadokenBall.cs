@@ -8,6 +8,7 @@ public class HadokenBall : MonoBehaviour
     [SerializeField] private float speed = 2.0f;
     [SerializeField] public Vector3 target; // { get; set; }
     [SerializeField] private GameObject explosion;
+    [SerializeField] private AudioClip audioClip;
 
     public Func<Collider,bool> OnCollision;
     public Action<GameObject> OnDestroy = null;
@@ -18,6 +19,11 @@ public class HadokenBall : MonoBehaviour
         if(OnCollision(collider))
         {
             var go = Instantiate(explosion);
+            AudioSource audioSource = go.GetComponent<AudioSource>();
+            if (audioSource != null && audioClip != null)
+            {
+                audioSource.PlayOneShot(audioClip);
+            }
             go.transform.position = transform.position;
             if (OnDestroy != null) OnDestroy(gameObject);
             Destroy(gameObject);

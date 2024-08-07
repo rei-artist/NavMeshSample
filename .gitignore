@@ -5,6 +5,7 @@ $ cat .gitignore
 [Bb]uild/
 [Bb]uilds/
 Assets/AssetStoreTools*
+Assets/Exp/
 
 # Visual Studio cache directory
 .vs/

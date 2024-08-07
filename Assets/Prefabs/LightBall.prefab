@@ -122,6 +122,7 @@ MonoBehaviour:
   speed: 10
   target: {x: 0, y: 0, z: 0}
   explosion: {fileID: 6942194513338388126, guid: 250857cabf6b6c044b5911e9de121b25, type: 3}
+  audioClip: {fileID: 8300000, guid: f514fa5e3ebe56a42a190a92a4afd328, type: 3}
 --- !u!54 &-2808438082145236344
 Rigidbody:
   m_ObjectHideFlags: 0
